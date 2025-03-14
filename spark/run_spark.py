@@ -30,7 +30,7 @@ df_tmdb = df_tmdb.na.drop(subset=["title"])
 df_tmdb = df_tmdb.dropDuplicates(["title", "runtime"])
 df_tmdb = df_tmdb.filter(df_tmdb["runtime"] > 0)
 df_tmdb = df_tmdb.filter(col("status") == "Released")
-'''
+
 # ========== STEP 4: CLEAN IMBD DATA ==========
 df_imbd = df_imbd.withColumn("rating", col("rating").cast("float")) \
                  .withColumn("runtime", regexp_replace(col("runtime"), "[^0-9]", "").cast("int"))
@@ -38,7 +38,7 @@ df_imbd = df_imbd.withColumn("rating", col("rating").cast("float")) \
 df_imbd = df_imbd.withColumn("director", when(trim(col("director")) == "", None).otherwise(col("director")))
 df_imbd = df_imbd.na.drop(subset=["director"])
 df_imbd = df_imbd.dropDuplicates(["movie", "runtime"])
-
+'''
 # ========== STEP 5: FIX ENCODING ISSUES ==========
 def fix_encoding(text):
     if text is None or text.strip() in ["", "[]", "nan", "NaN", "null", "NULL"]:
