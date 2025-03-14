@@ -70,7 +70,7 @@ df_imbd = df_imbd.withColumn(
     .when(col("certificate") == "(Banned)", "Banned")
     .otherwise(col("certificate"))
 )
-'''
+
 # ========== STEP 7: MATCH MOVIES FROM BOTH DATASETS ==========
 df_tmdb = df_tmdb.withColumn("title_lower", lower(col("title")))
 df_imbd = df_imbd.withColumn("movie_lower", lower(col("movie")))
@@ -79,7 +79,7 @@ joined_df = df_tmdb.join(df_imbd,
                          (df_tmdb["title_lower"] == df_imbd["movie_lower"]) & 
                          (df_tmdb["runtime"] == df_imbd["runtime"]), 
                          "inner")
-
+'''
 # Save merged data
 joined_df.write.mode("overwrite").parquet(f"{DATA_PATH}/merged_movies.parquet")
 '''
