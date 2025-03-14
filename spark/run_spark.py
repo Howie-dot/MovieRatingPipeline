@@ -17,7 +17,7 @@ DATA_PATH = os.path.join(HOME_DIR, "team19", "data")
 # ========== STEP 2: LOAD DATA ==========
 df_tmdb = spark.read.csv(f"{DATA_PATH}/TMDB_movie_dataset_v11.csv", header=True, inferSchema=True)
 df_imbd = spark.read.csv(f"{DATA_PATH}/IMBD.csv", header=True, inferSchema=True)
-'''
+
 # ========== STEP 3: CLEAN TMDB DATA ==========
 df_tmdb = df_tmdb.withColumn("vote_average", col("vote_average").cast("float")) \
                  .withColumn("vote_count", col("vote_count").cast("int")) \
@@ -30,7 +30,7 @@ df_tmdb = df_tmdb.na.drop(subset=["title"])
 df_tmdb = df_tmdb.dropDuplicates(["title", "runtime"])
 df_tmdb = df_tmdb.filter(df_tmdb["runtime"] > 0)
 df_tmdb = df_tmdb.filter(col("status") == "Released")
-
+'''
 # ========== STEP 4: CLEAN IMBD DATA ==========
 df_imbd = df_imbd.withColumn("rating", col("rating").cast("float")) \
                  .withColumn("runtime", regexp_replace(col("runtime"), "[^0-9]", "").cast("int"))
