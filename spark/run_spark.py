@@ -85,6 +85,7 @@ joined_df.write.mode("overwrite").parquet(f"{DATA_PATH}/merged_movies.parquet")
 
 print(f"Data cleaned and merged! {joined_df.count()} rows saved as merged_movies.parquet.")
 '''
+'''
 import os
 from pyspark.sql import SparkSession
 
@@ -100,6 +101,6 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 sc = spark.sparkContext
-
+'''
 print("Spark is successfully running on EC2!")
 
