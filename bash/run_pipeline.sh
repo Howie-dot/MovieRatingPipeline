@@ -51,4 +51,18 @@ for DATA in "${DATASETS[@]}"; do
     unzip -o $DATASET_PATH/$DATASET_NAME.zip -d $DATASET_PATH/
 done
 
-echo "All datasets downloaded and extracted successfully."
+echo "All Kaggle datasets downloaded and extracted successfully."
+
+# ========== STEP 3: DOWNLOAD CPI DATA ==========
+echo "Downloading CPI data from FRED..."
+
+CPI_URL="https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL"
+CPI_FILE="$DATASET_PATH/CPI_data.csv"
+
+wget --no-check-certificate --user-agent="Mozilla/5.0" "$CPI_URL" -O "$CPI_FILE"
+
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to download CPI data!"
+else
+    echo "CPI data downloaded successfully: $CPI_FILE"
+fi
