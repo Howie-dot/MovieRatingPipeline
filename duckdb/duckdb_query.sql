@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS movies AS 
-    SELECT * FROM read_parquet('$LOADPATH');
+    SELECT * FROM read_csv_auto('../data/movies_df.csv');
 
 -- Ensure correct data types
 ALTER TABLE movies ALTER revenue TYPE DOUBLE;
