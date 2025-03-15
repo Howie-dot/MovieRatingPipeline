@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS movies AS 
-    SELECT * FROM read_csv_auto('/content/movies_cleaned (1).csv', HEADER=TRUE);
+    SELECT * FROM read_csv_auto('../data/movies_df.csv', HEADER=TRUE);
 
 -- Ensure correct data types
 ALTER TABLE movies ALTER revenue TYPE DOUBLE;
