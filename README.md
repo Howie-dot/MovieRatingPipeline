@@ -27,5 +27,9 @@ In order to download the data from kaggle, you need to set up Kaggle API
    ```
 3. **The bash pipeline `run_pipeline.sh` will automatically download the dataset into the data pipeline**
 
+### Tableau Visualization
+We created and publcished an interactive tableau dashboard to visualize our data analysis: 
+
+https://public.tableau.com/views/405FinalProject_YS/OverviewMovieRevenueAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link 
 
 
