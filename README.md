@@ -1,5 +1,5 @@
 # Group 19 MSBA 405 Pipeline (Final Project)
-# Pipeline to Understanding Movie Revenue, Ratings, and Industry Trends 
+# Pipeline to Optimizing Strategy for Movie Production Companies through Data 
 
 ### Data Source
 For this analysis, we used a total of three datasets:
@@ -41,7 +41,7 @@ In order to download the data from kaggle, you need to set up Kaggle API
    
 
 ### Tableau Visualization
-We created and publcished an interactive tableau dashboard to visualize our data analysis: 
+We created and published an interactive tableau dashboard to visualize our data analysis: 
 
 https://public.tableau.com/views/405FinalProject_YS/OverviewMovieRevenueAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link 
 
