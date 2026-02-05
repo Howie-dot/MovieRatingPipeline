@@ -30,53 +30,38 @@ The resulting data model enables flexible analysis across genres, directors, lea
 
 ## Architecture Overview
 
-┌──────────────────────────────────┐
-│          Raw Data Sources        │
-│  - Movie Metadata (CSV)          │
-│  - Genre / Cast / Director       │
-│  - CPI (Inflation Data)          │
-└───────────────┬──────────────────┘
-                │
-                ▼
-┌──────────────────────────────────┐
-│     Bash Orchestration Layer     │
-│        run_pipeline.sh           │
-│  - Secure data ingestion         │
-│  - Spark job coordination        │
-│  - End-to-end reproducibility    │
-└───────────────┬──────────────────┘
-                │
-                ▼
-┌──────────────────────────────────┐
-│   PySpark Processing Layer       │
-│        run_spark.py              │
-│  - Data cleaning                 │
-│  - Schema normalization          │
-│  - Multi-source joins            │
-│  - Inflation adjustment          │
-└───────────────┬──────────────────┘
-                │
-                ▼
-┌──────────────────────────────────┐
-│      Curated Datasets            │
-│  - Analytics-ready outputs       │
-│  - Partitioned data              │
-└───────────────┬──────────────────┘
-                │
-                ▼
-┌──────────────────────────────────┐
-│   DuckDB Analytical Layer        │
-│     duckdb_query.sql             │
-│  - View definitions              │
-│  - BI-friendly aggregations      │
-└───────────────┬──────────────────┘
-                │
-                ▼
-┌──────────────────────────────────┐
-│     Downstream Analytics         │
-│  - SQL analysis                  │
-│  - Tableau dashboards            │
-└──────────────────────────────────┘
+Pipeline/
+├── raw_data_sources/                 # External data inputs
+│   ├── movie_metadata.csv            # Movie revenue, budget, release info
+│   ├── genre_cast_director.csv       # Genre, cast, and director metadata
+│   └── cpi.csv                       # Inflation (CPI) data
+│
+├── orchestration/                    # Pipeline orchestration layer
+│   └── run_pipeline.sh               # End-to-end pipeline execution
+│       # - Secure data ingestion
+│       # - Spark job coordination
+│       # - Reproducible execution
+│
+├── processing/                       # Distributed processing layer
+│   └── run_spark.py                  # PySpark batch processing
+│       # - Schema normalization
+│       # - Multi-source joins
+│       # - Feature engineering
+│       # - Inflation adjustment
+│
+├── curated_data/                     # Analytics-ready outputs
+│   ├── movies_enriched/              # Cleaned, enriched movie-level data
+│   └── aggregates/                   # Pre-aggregated analytical tables
+│
+├── analytical_serving/               # Analytical query layer
+│   └── duckdb_query.sql              # DuckDB view definitions
+│       # - BI-friendly aggregations
+│       # - SQL-based analytics layer
+│
+└── downstream_consumption/           # Data consumers
+    ├── sql_analysis                  # Ad-hoc analytical queries
+    └── tableau_dashboards            # Visualization layer
+
 
 ---
 
