@@ -72,6 +72,7 @@ The entire pipeline is executed via a single Bash entrypoint:
 
 ```bash
 bash/run_pipeline.sh
+```
 
 This script coordinates:
 
