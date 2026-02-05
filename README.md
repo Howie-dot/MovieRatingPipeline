@@ -30,6 +30,7 @@ The resulting data model enables flexible analysis across genres, directors, lea
 
 ## Architecture Overview
 
+```
 Pipeline/
 ├── raw_data_sources/                 # External data inputs
 │   ├── movie_metadata.csv            # Movie revenue, budget, release info
@@ -61,7 +62,7 @@ Pipeline/
 └── downstream_consumption/           # Data consumers
     ├── sql_analysis                  # Ad-hoc analytical queries
     └── tableau_dashboards            # Visualization layer
-
+```
 
 ---
 
