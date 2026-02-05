@@ -30,28 +30,37 @@ The resulting data model enables flexible analysis across genres, directors, lea
 
 ## Architecture Overview
 
-Raw Data Sources  
-↓  
-Bash Orchestration (`run_pipeline.sh`)  
-- Data extraction (Kaggle API, wget)  
-- Spark job execution  
-
-↓  
-PySpark Transformations (`run_spark.py`)  
-- Data cleaning and schema normalization  
-- Multi-source joins  
-- Inflation adjustment  
-
-↓  
-Processed Datasets  
-
-↓  
-DuckDB Analytical Layer (`duckdb_query.sql`)  
-- View creation  
-- Aggregations for BI consumption  
-
-↓  
-Downstream Analytics (Tableau / SQL)
+[ Raw Data Sources ]
+        │
+        │  (CSV, CPI, Metadata)
+        ▼
+[ Bash Orchestration ]
+  run_pipeline.sh
+  ├─ Secure ingestion
+  ├─ Spark job control
+  └─ End-to-end reproducibility
+        │
+        ▼
+[ PySpark Processing Layer ]
+  run_spark.py
+  ├─ Data cleaning
+  ├─ Schema alignment
+  ├─ Multi-source joins
+  └─ Inflation adjustment
+        │
+        ▼
+[ Curated Datasets ]
+  Analytics-ready outputs
+        │
+        ▼
+[ DuckDB Analytical Layer ]
+  duckdb_query.sql
+  ├─ View creation
+  └─ BI-friendly aggregations
+        │
+        ▼
+[ Analytics & BI ]
+  SQL · Tableau
 
 ---
 
