@@ -30,37 +30,53 @@ The resulting data model enables flexible analysis across genres, directors, lea
 
 ## Architecture Overview
 
-[ Raw Data Sources ]
-        │
-        │  (CSV, CPI, Metadata)
-        ▼
-[ Bash Orchestration ]
-  run_pipeline.sh
-  ├─ Secure ingestion
-  ├─ Spark job control
-  └─ End-to-end reproducibility
-        │
-        ▼
-[ PySpark Processing Layer ]
-  run_spark.py
-  ├─ Data cleaning
-  ├─ Schema alignment
-  ├─ Multi-source joins
-  └─ Inflation adjustment
-        │
-        ▼
-[ Curated Datasets ]
-  Analytics-ready outputs
-        │
-        ▼
-[ DuckDB Analytical Layer ]
-  duckdb_query.sql
-  ├─ View creation
-  └─ BI-friendly aggregations
-        │
-        ▼
-[ Analytics & BI ]
-  SQL · Tableau
+┌──────────────────────────────────┐
+│          Raw Data Sources        │
+│  - Movie Metadata (CSV)          │
+│  - Genre / Cast / Director       │
+│  - CPI (Inflation Data)          │
+└───────────────┬──────────────────┘
+                │
+                ▼
+┌──────────────────────────────────┐
+│     Bash Orchestration Layer     │
+│        run_pipeline.sh           │
+│  - Secure data ingestion         │
+│  - Spark job coordination        │
+│  - End-to-end reproducibility    │
+└───────────────┬──────────────────┘
+                │
+                ▼
+┌──────────────────────────────────┐
+│   PySpark Processing Layer       │
+│        run_spark.py              │
+│  - Data cleaning                 │
+│  - Schema normalization          │
+│  - Multi-source joins            │
+│  - Inflation adjustment          │
+└───────────────┬──────────────────┘
+                │
+                ▼
+┌──────────────────────────────────┐
+│      Curated Datasets            │
+│  - Analytics-ready outputs       │
+│  - Partitioned data              │
+└───────────────┬──────────────────┘
+                │
+                ▼
+┌──────────────────────────────────┐
+│   DuckDB Analytical Layer        │
+│     duckdb_query.sql             │
+│  - View definitions              │
+│  - BI-friendly aggregations      │
+└───────────────┬──────────────────┘
+                │
+                ▼
+┌──────────────────────────────────┐
+│     Downstream Analytics         │
+│  - SQL analysis                  │
+│  - Tableau dashboards            │
+└──────────────────────────────────┘
 
 ---
 
