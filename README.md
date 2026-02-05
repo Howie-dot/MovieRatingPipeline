@@ -1,48 +1,63 @@
-# Group 19 MSBA 405 Pipeline (Final Project)
-# Pipeline to Optimizing Strategy for Movie Production Companies through Data 
+# End-to-End Spark Data Pipeline for Movie Revenue Strategy Analysis
 
-### Data Source
-For this analysis, we used a total of three datasets:
+This project implements a production-style, end-to-end data pipeline designed to support strategic decision-making for movie production companies. The pipeline ingests large-scale public movie metadata, performs distributed transformations using PySpark, and exposes curated analytical views through DuckDB for downstream analysis and visualization.
 
-We went to this page https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies/data and downloaded the Movies data from 2008 - 2023 in csv format. 
+The emphasis of this project is on pipeline design, automation, and analytical readiness, rather than exploratory notebooks or ad-hoc analysis.
 
-We also downloaded genre, lead actors, and movie directors information from: 
+---
 
-https://www.kaggle.com/datasets/gayu14/tv-and-movie-metadata-with-genres-and-ratings-imbd 
+## Problem Statement
 
-We then downloaded the inflation rate data from the Federal Reserve Economic Database: 
+Movie production companies operate in a capital-intensive and highly uncertain environment. Decisions around genre allocation, talent selection, and release timing depend on understanding historical performance while accounting for inflation and structural differences across films.
 
-https://fred.stlouisfed.org/graph/?g=rocU 
+The goal of this project is to transform raw, heterogeneous movie datasets into a clean, analytics-ready data layer that supports portfolio-level revenue strategy analysis.
 
-### Data Download
-In order to download the data from kaggle, you need to set up Kaggle API
+---
 
-1. **Go to [Kaggle](https://www.kaggle.com/account) → API → Create New API Token**  
-2. **Download `kaggle.json` and replace the placeholder in `team19/.kaggle/`**  
-   ```sh
-   mv kaggle.json ~/team19/.kaggle/
-   chmod 600 ~/team19/.kaggle/kaggle.json
-   ```
-3. **The bash pipeline `run_pipeline.sh` will automatically download the dataset into the data pipeline**
+## Solution Overview
 
-### Pipeline
+I designed and implemented a batch analytics pipeline with the following characteristics:
 
-1. **Extraction**
-   Kaggle data is downloaded using API json key, CPI data is downloaded with `wget`
-   All data files are saved in `team19/data`
+- Automated ingestion from multiple external data sources  
+- Distributed data cleaning and feature engineering using PySpark  
+- Inflation-adjusted revenue normalization  
+- Analytical view creation using DuckDB  
+- A single-entrypoint Bash workflow to ensure reproducibility  
 
-2. **Transform**
-   Data is pulled from data folder and fed into pyspark for cleaning.
-   Processed data is saved back into `team19/data`
+The resulting data model enables flexible analysis across genres, directors, lead actors, budgets, and time periods.
 
-3. **Lead**
-   DuckDB database intialized under `team19/duckdb`
-   DuckDB executes SQL to create views
-   
+---
 
-### Tableau Visualization
-We created and published an interactive tableau dashboard to visualize our data analysis: 
+## Architecture Overview
 
-https://public.tableau.com/views/405FinalProject_YS/OverviewMovieRevenueAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link 
+Raw Data Sources  
+↓  
+Bash Orchestration (`run_pipeline.sh`)  
+- Data extraction (Kaggle API, wget)  
+- Spark job execution  
 
+↓  
+PySpark Transformations (`run_spark.py`)  
+- Data cleaning and schema normalization  
+- Multi-source joins  
+- Inflation adjustment  
 
+↓  
+Processed Datasets  
+
+↓  
+DuckDB Analytical Layer (`duckdb_query.sql`)  
+- View creation  
+- Aggregations for BI consumption  
+
+↓  
+Downstream Analytics (Tableau / SQL)
+
+---
+
+## Pipeline Orchestration
+
+The entire pipeline is executed via a single Bash entrypoint:
+
+```bash
+bash/run_pipeline.sh
