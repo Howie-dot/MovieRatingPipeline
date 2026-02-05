@@ -150,6 +150,7 @@ To reproduce the full pipeline:
 
 ```bash
 bash/run_pipeline.sh
+```
 
 3. Query analytical views via DuckDB or connect a BI tool
 
